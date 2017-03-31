@@ -1,0 +1,15 @@
+<!-- only shows this div if the property hero is not null -->
+<div *ngIf="hero">
+
+	<h2>{{hero.name}} details!</h2>
+	<div>
+		<label>id: </label>{{hero.id}}
+	</div>
+	<div>
+		<label>name: </label>
+
+		<!-- bind this input with the property "hero.name" -->
+		<input [(ngModel)]="hero.name" placeholder="name" />
+	</div>
+	<button (click)="goBack()">Back</button>
+</div>
