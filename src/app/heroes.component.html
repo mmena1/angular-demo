@@ -1,0 +1,22 @@
+<h2>My Heroes</h2>
+<ul class="heroes">
+
+	<!-- asign a variable "hero" for each element in the list -->
+	<!-- add a click event to each item which will triggers the onSelect method -->
+	<!-- add a css style class "selected" if this item is selected -->
+
+	<li *ngFor="let hero of heroes" (click)="onSelect(hero)"
+		[class.selected]="hero === selectedHero">
+		<!-- each hero goes here --> <span class="badge">{{hero.id}}</span>
+		{{hero.name}}
+
+	</li>
+</ul>
+
+<div *ngIf="selectedHero">
+	<h2>
+		<!-- Pipes are used for formatting -->
+		{{selectedHero.name | uppercase}} is my hero
+	</h2>
+	<button (click)="gotoDetail()">View Details</button>
+</div>

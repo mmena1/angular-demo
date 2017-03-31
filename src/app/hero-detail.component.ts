@@ -3,18 +3,20 @@
  */
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'hero-detail',
-  templateUrl: './hero-detail.component.html'
+  templateUrl: './hero-detail.component.html',
+  styleUrls: ['./hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
   // Declares this property as an Input property so it can be binded in HeroesComponent template
-  @Input() hero: Hero;
+  // @Input (no longer needed because we are using a route module)
+  hero: Hero;
 
   constructor(
     private heroService: HeroService,
