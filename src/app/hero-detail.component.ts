@@ -1,6 +1,6 @@
 /**
- * New typescript file
- */
+* New typescript file
+*/
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 import { Component, OnInit } from '@angular/core';
@@ -48,5 +48,10 @@ export class HeroDetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+    this.heroService.update(this.hero)
+      .then(() => this.goBack());
   }
 }
