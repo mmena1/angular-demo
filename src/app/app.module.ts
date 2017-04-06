@@ -1,5 +1,6 @@
 /*
- * This is the root module that tells Angular how to assemble the application, kind of like a pom.xml file.
+ * This is the root module that tells Angular how to assemble the application,
+ * kind of like the dependencies in a pom.xml file.
  */
 import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
