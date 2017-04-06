@@ -9,12 +9,18 @@ var gulp = require('gulp'),
 	filter = require('gulp-filter'),
 	ts = require('gulp-typescript'),
 	tslint = require('gulp-tslint'),
-	tsProject = ts.createProject('tsconfig.json');
+	sourcemaps = require('gulp-sourcemaps'),
+	tsProject = ts.createProject('tsconfig.json'),
+	Server = require('karma').Server;
+;
 
 gulp.task('build', gulp.series(clean, validateSources, compile, copyResources, copyNpmDependenciesOnly));
 gulp.task('watch', gulp.series(buildWatch));
 gulp.task('clean', gulp.series(clean));
-gulp.task('compile', gulp.series(compile));
+gulp.task('compile', gulp.series(validateSources, compile));
+
+// build is not needed as it is automatically called when running 'npm test'
+gulp.task('test', gulp.series(compileTests, test));
 
 function clean() {
 	return del([ 'build' ]).then(paths => {
@@ -45,8 +51,18 @@ function copyNpmDependenciesOnly(done) {
 	done();
 }
 
-function buildWatch(done) {
-	return gulp.watch('./src/**/*.*', gulp.series('build'));
+function buildWatch() {
+	//return gulp.watch([ './src/**/*.*', './testing/**/*.*' ], gulp.series('build'));
+
+	gulp.watch([ "src/**/*.ts" ], gulp.series('compile')).on('change', function(e) {
+		console.log('TypeScript file ' + e.path + ' has been changed. Compiling.');
+	});
+	gulp.watch([ "testing/**/*.ts" ], gulp.series(compileTests)).on('change', function(e) {
+		console.log('TypeScript test ' + e.path + ' has been changed. Compiling.');
+	});
+	gulp.watch([ "src/**/*.html", "src/**/*.css" ], gulp.series(copyResources)).on('change', function(e) {
+		console.log('Resource file ' + e.path + ' has been changed. Updating.');
+	});
 }
 
 function validateSources() {
@@ -57,15 +73,46 @@ function validateSources() {
 		.pipe(tslint.report());
 }
 
-function compile() {
-	var tsResult = gulp.src("src/**/*.ts").pipe(tsProject());
+function compileTests() {
+	var tsResult = gulp.src("testing/**/*.ts")
+		.pipe(sourcemaps.init())
+		.pipe(tsProject());
 
-	return tsResult.js.pipe(gulp.dest('build'));
+	return tsResult.js
+		.pipe(sourcemaps.write(".", {
+			sourceRoot : '/testing'
+		}))
+		.pipe(gulp.dest('testing'));
+}
+
+function compile() {
+	var tsResult = gulp.src("src/**/*.ts")
+		.pipe(sourcemaps.init())
+		.pipe(tsProject());
+
+	return tsResult.js
+		.pipe(sourcemaps.write(".", {
+			sourceRoot : '/src'
+		}))
+		.pipe(gulp.dest('build'));
 }
 
 function copyResources() {
 	return gulp.src([ "src/**/*", "!**/*.ts" ])
 		.pipe(gulp.dest("build"));
+}
+
+function testOnce(done) {
+	new Server({
+		configFile : __dirname + '/karma.conf.js',
+		singleRun : true
+	}, done).start();
+}
+
+function test(done) {
+	new Server({
+		configFile : __dirname + '/karma.conf.js',
+	}, done).start();
 }
 
 function minifyDependencies(done) {

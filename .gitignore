@@ -40,3 +40,5 @@ jspm_packages
 .settings
 nbproject
 build
+testing/*.js
+testing/*.js.map
