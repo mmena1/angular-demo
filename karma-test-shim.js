@@ -37,7 +37,7 @@ var allSpecFiles = Object.keys(window.__karma__.files)
 
 System.config({
 	// Base URL for System.js calls. 'base/' is where Karma serves files from.
-	baseURL : 'base/src',
+	baseURL : 'base/build',
 	// Extend usual application package list with test folder
 	packages : {
 		'testing' : {

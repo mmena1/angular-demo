@@ -42,3 +42,4 @@ nbproject
 build
 testing/*.js
 testing/*.js.map
+.idea
