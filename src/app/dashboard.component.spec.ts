@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
-import {DebugElement} from '@angular/core';
+import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
 
 import {DashboardComponent} from './dashboard.component';
 import {async} from '@angular/core/testing';
@@ -17,7 +17,8 @@ describe('DashboardComponent (templateUrl)', () => {
 
     TestBed.configureTestingModule({
       declarations: [DashboardComponent], // declare the test component
-      providers: [HeroService]
+      providers: [HeroService],
+      schemas: [ NO_ERRORS_SCHEMA ]
     }).compileComponents();  // compile template and css;
 
 

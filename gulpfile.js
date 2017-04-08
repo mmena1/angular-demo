@@ -1,4 +1,6 @@
-var gulp = require('gulp'),
+'use strict'
+
+let gulp = require('gulp'),
   del = require('del'),
   gnf = require('gulp-npm-files'),
   inject = require('gulp-inject'),
@@ -11,7 +13,7 @@ var gulp = require('gulp'),
   tslint = require('gulp-tslint'),
   sourcemaps = require('gulp-sourcemaps'),
   tsProject = ts.createProject('tsconfig.json'),
-  Server = require('karma').Server;
+  Server = require('karma').Server
 ;
 
 gulp.task('build', gulp.series(clean, validateSources, compile, copyResources, copyNpmDependenciesOnly));
@@ -30,7 +32,7 @@ function clean() {
 }
 
 function copyIndex(done) {
-  var npmFiles = gulp.src(['./dist/vendor/js/vendor.all.min.js'], {
+  let npmFiles = gulp.src(['./dist/vendor/js/vendor.all.min.js'], {
     read: false
   });
   return gulp.src('./src/index.html').pipe(inject(npmFiles, {
@@ -74,7 +76,7 @@ function validateSources() {
 }
 
 function compileTests() {
-  var tsResult = gulp.src("testing/**/*.ts")
+  let tsResult = gulp.src("testing/**/*.ts")
     .pipe(sourcemaps.init())
     .pipe(tsProject());
 
@@ -84,7 +86,7 @@ function compileTests() {
 }
 
 function compile() {
-  var tsResult = gulp.src("src/**/*.ts")
+  let tsResult = gulp.src("src/**/*.ts")
     .pipe(sourcemaps.init())
     .pipe(tsProject());
 
@@ -114,7 +116,7 @@ function test(done) {
 }
 
 function minifyDependencies(done) {
-  var jsFilter = filter('**/*.js', {
+  let jsFilter = filter('**/*.js', {
     restore: true
   })
   //		cssFilter = filter('*.css', {
