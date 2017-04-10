@@ -1,9 +1,9 @@
 /*
  * This is the root component of what will become a tree of nested components as the application evolves.
  */
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 @Component({
-  selector: 'my-app',
+  selector: 'app',
   styleUrls: ['./app.component.css'],
   template: `
     <h1>{{title}}</h1>
@@ -15,5 +15,5 @@ import {Component} from '@angular/core';
   `
 })
 export class AppComponent {
-  title = 'Tour of Heroes';
+  public title = 'Tour of Heroes';
 }

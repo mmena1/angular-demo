@@ -1,10 +1,10 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
-import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 
-import {DashboardComponent} from './dashboard.component';
-import {async} from '@angular/core/testing';
-import {HeroService} from "./hero.service";
+import { DashboardComponent } from './dashboard.component';
+import { async } from '@angular/core/testing';
+import { HeroService } from './hero.service';
 
 describe('DashboardComponent (templateUrl)', () => {
   let comp: DashboardComponent;
@@ -18,17 +18,14 @@ describe('DashboardComponent (templateUrl)', () => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent], // declare the test component
       providers: [HeroService],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();  // compile template and css;
-
 
   }));
 
   beforeEach(() => {
 
-
-
-      let heroes = Promise.resolve({
+    let heroes = Promise.resolve({
         hero1: {
           id: 1,
           name: 'hero1'
@@ -62,7 +59,7 @@ describe('DashboardComponent (templateUrl)', () => {
     de = fixture.debugElement.queryAll(By.css('h4'));
     let i: number = 0;
     de.forEach(
-      element => el[i] = element.nativeElement);
+      (element) => el[i] = element.nativeElement);
     i++;
   });
 
@@ -75,7 +72,7 @@ describe('DashboardComponent (templateUrl)', () => {
   //   de.forEach(element => expect(names.find(name => name === element.name)).toBeTruthy());
   // });
 
-  it("tracks that the spy was called", () => {
+  it('tracks that the spy was called', () => {
     expect(heroService.getHeroes).toHaveBeenCalled();
   });
 

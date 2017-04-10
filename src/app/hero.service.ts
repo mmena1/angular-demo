@@ -19,25 +19,21 @@ export class HeroService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+  }
 
   getHeroes(): Promise<Hero[]> {
     return this.http.get(this.heroesUrl)
       .toPromise()
-      .then(response => response.json().data as Hero[])
+      .then((response) => response.json().data as Hero[])
       .catch(this.handleError);
-  }
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
   }
 
   getHero(id: number): Promise<Hero> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Hero)
+      .then((response) => response.json().data as Hero)
       .catch(this.handleError);
   }
 
@@ -52,9 +48,9 @@ export class HeroService {
 
   create(name: string): Promise<Hero> {
     return this.http
-      .post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
+      .post(this.heroesUrl, JSON.stringify({ name }), { headers: this.headers })
       .toPromise()
-      .then(res => res.json().data as Hero)
+      .then((res) => res.json().data as Hero)
       .catch(this.handleError);
   }
 
@@ -64,5 +60,10 @@ export class HeroService {
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 }

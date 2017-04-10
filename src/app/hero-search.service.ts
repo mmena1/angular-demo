@@ -11,9 +11,9 @@ export class HeroSearchService {
     return this.http
       .get(`app/heroes/?name=${term}`)
       /*
-       * There is no need to call toPromise() as the data is already loaded, 
+       * There is no need to call toPromise() as the data is already loaded,
        * we just return the Observable from the the http.get()
        */
-      .map(response => response.json().data as Hero[]);
+      .map((response) => response.json().data as Hero[]);
   }
 }

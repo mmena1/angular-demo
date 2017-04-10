@@ -17,6 +17,7 @@ import { HttpModule } from '@angular/http';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
+import '../styles/styles.css';
 
 @NgModule({
   // External modules used in the app must be declared here
@@ -33,4 +34,5 @@ import { InMemoryDataService } from './in-memory-data.service';
   // Providers which can be used for injection anywhere in the app
   providers: [HeroService]
 })
-export class AppModule { }
+export class AppModule {
+}
