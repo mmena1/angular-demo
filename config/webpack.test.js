@@ -3,6 +3,7 @@
  */
 
 const helpers = require('./helpers');
+const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 
 /**
  * Webpack Plugins
@@ -16,6 +17,29 @@ const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin')
  * Webpack Constants
  */
 const ENV = process.env.ENV = process.env.NODE_ENV = 'test';
+const USE_COVERAGE = helpers.useCoverage();
+const COVERAGE_CONFIG_DIFF = {
+  module: {
+    rules: [
+      /**
+       * Instruments JS files with Istanbul for subsequent code coverage reporting.
+       * Instrument only testing sources.
+       *
+       * See: https://github.com/deepsweet/istanbul-instrumenter-loader
+       */
+      {
+        enforce: 'post',
+        test: /\.(js|ts)$/,
+        loader: 'istanbul-instrumenter-loader',
+        include: helpers.root('src'),
+        exclude: [
+          /\.(e2e|spec)\.ts$/,
+          /node_modules/
+        ]
+      }
+    ]
+  }
+};
 
 /**
  * Webpack configuration
@@ -23,7 +47,7 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'test';
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = function (options) {
-  return {
+  const config = {
 
     /**
      * Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
@@ -95,8 +119,8 @@ module.exports = function (options) {
               loader: 'awesome-typescript-loader',
               query: {
                 // use inline sourcemaps for "karma-remap-coverage" reporter
-                sourceMap: false,
-                inlineSourceMap: true,
+                sourceMap: !USE_COVERAGE,
+                inlineSourceMap: USE_COVERAGE,
                 compilerOptions: {
 
                   // Remove TypeScript helpers to be injected
@@ -156,23 +180,6 @@ module.exports = function (options) {
           loader: 'raw-loader',
           exclude: [helpers.root('src/index.html')]
         },
-
-        /**
-         * Instruments JS files with Istanbul for subsequent code coverage reporting.
-         * Instrument only testing sources.
-         *
-         * See: https://github.com/deepsweet/istanbul-instrumenter-loader
-         */
-        {
-          enforce: 'post',
-          test: /\.(js|ts)$/,
-          loader: 'istanbul-instrumenter-loader',
-          include: helpers.root('src'),
-          exclude: [
-            /\.(e2e|spec)\.ts$/,
-            /node_modules/
-          ]
-        }
 
       ]
     },
@@ -259,4 +266,7 @@ module.exports = function (options) {
     }
 
   };
-}
+  
+  return USE_COVERAGE ? webpackMerge(COVERAGE_CONFIG_DIFF, config) : config;
+};
+

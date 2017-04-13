@@ -61,7 +61,7 @@ dll/
 /doc/
 
 # IDE #
-#.idea/
+.idea/
 *.swp
 
 

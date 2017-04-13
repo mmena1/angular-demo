@@ -5,6 +5,7 @@ import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { DashboardComponent } from './dashboard.component';
 import { async } from '@angular/core/testing';
 import { HeroService } from './hero.service';
+import Spy = jasmine.Spy;
 
 describe('DashboardComponent (templateUrl)', () => {
   let comp: DashboardComponent;
@@ -12,6 +13,7 @@ describe('DashboardComponent (templateUrl)', () => {
   let de: DebugElement[];
   let el: HTMLElement[];
   let heroService: HeroService;
+  let spy: Spy;
 
   beforeEach(async(() => {
 
@@ -52,7 +54,7 @@ describe('DashboardComponent (templateUrl)', () => {
     // HeroService actually injected into the component
     heroService = fixture.debugElement.injector.get(HeroService);
 
-    spyOn(heroService, 'getHeroes')
+    spy = spyOn(heroService, 'getHeroes')
       .and.returnValue(Promise.resolve(heroes));
 
     // query for the title <h4> by CSS element selector
@@ -72,8 +74,17 @@ describe('DashboardComponent (templateUrl)', () => {
   //   de.forEach(element => expect(names.find(name => name === element.name)).toBeTruthy());
   // });
 
-  it('tracks that the spy was called', () => {
-    expect(heroService.getHeroes).toHaveBeenCalled();
-  });
+  // it('should not show heroes before OnInit', () => {
+  //   expect(spy.calls.any()).toBe(false, 'getHeroes not yet called');
+  // });
+  //
+  // it('should still not show heroes after component initialized', () => {
+  //   fixture.detectChanges();
+  //   de = fixture.debugElement.queryAll(By.css('h4'));
+  //   expect(de.length).toEqual(0, 'still no heroes');
+  //   // getQuote service is async => still has not returned with quote
+  //   expect(spy.calls.any()).toBe(true, 'getHeroes called');
+  //   expect(heroService.getHeroes).toHaveBeenCalled();
+  // });
 
 });

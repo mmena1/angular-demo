@@ -1,11 +1,11 @@
-import {AppComponent} from './app.component';
+import { AppComponent } from './app.component';
 
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {By}           from '@angular/platform-browser';
-import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
-import {RouterLinkStubDirective} from "../../testing/router-stubs";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By }           from '@angular/platform-browser';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterLinkStubDirective } from '../../testing/router-stubs';
 
-describe('AppComponent', function () {
+describe('AppComponent', () => {
   let h1: DebugElement;
   let el: HTMLElement;
   let comp: AppComponent;
@@ -30,23 +30,22 @@ describe('AppComponent', function () {
 
       // get the attached link directive instances using the DebugElement injectors
       links = linkDes
-        .map(de => de.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective);
+        .map((de) => de.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective);
     });
   }));
 
   it('should create component', () => expect(comp).toBeDefined());
 
   it('should have expected <h1> text', () => {
-    fixture.detectChanges();
     expect(el.textContent).toContain(comp.title);
   });
 
-  it('no title in the DOM until manually call `detectChanges`', () => {
-    expect(el.textContent).toEqual('');
+  it('title in the DOM should be equal to the component title', () => {
+    expect(el.textContent).toEqual(comp.title);
   });
 
   it('can get RouterLinks from template', () => {
-    expect(links.length).toBe(3, 'should have 3 links');
+    expect(links.length).toBe(2, 'should have 2 links');
     expect(links[0].linkParams).toBe('/dashboard', '1st link should go to Dashboard');
     expect(links[1].linkParams).toBe('/heroes', '1st link should go to Heroes');
   });
