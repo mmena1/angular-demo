@@ -17,7 +17,6 @@ import { HttpModule } from '@angular/http';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
-
 // import global styles in the main application module
 import '../styles/styles.css';
 
