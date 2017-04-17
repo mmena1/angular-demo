@@ -23,7 +23,7 @@ function isWebpackDevServer() {
 var root = path.join.bind(path, ROOT);
 
 function useCoverage () {
-  if (EVENT.indexOf('--auto-watch') !== -1) {
+  if (hasProcessFlag('--auto-watch') !== -1) {
     return false;
   } else {
     return !process.env.hasOwnProperty('NO_COVERAGE')
