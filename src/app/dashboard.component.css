@@ -59,3 +59,11 @@ h4 {
     min-width: 60px;
   }
 }
+
+.btn {
+  display: block;
+  padding: 20px;
+  text-align: center;
+  max-height: 120px;
+  min-width: 120px;
+}

@@ -14,7 +14,7 @@
 	cursor: pointer;
 	position: relative;
 	left: 0;
-	background-color: #EEE;
+	background-color: white;
 	margin: .5em;
 	padding: .3em 0;
 	height: 1.6em;
@@ -38,24 +38,26 @@
 }
 
 .heroes .badge {
-	display: inline-block;
+	display: inline;
 	font-size: small;
 	color: white;
 	padding: 0.8em 0.7em 0 0.7em;
 	background-color: #607D8B;
-	line-height: 1em;
+	line-height: 0;
 	position: relative;
 	left: -1px;
-	top: -4px;
-	height: 1.8em;
+	/*top: -7px;*/
+	height: 2em;
 	margin-right: .8em;
 	border-radius: 4px 0 0 4px;
 }
 
 button.delete {
 	float: right;
-	margin-top: 2px;
+	margin-top: -5px;
 	margin-right: .8em;
 	background-color: gray !important;
 	color: white;
+  line-height: 5px;
+  height: 25px;
 }

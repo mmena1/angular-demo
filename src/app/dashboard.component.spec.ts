@@ -74,17 +74,17 @@ describe('DashboardComponent (templateUrl)', () => {
   //   de.forEach(element => expect(names.find(name => name === element.name)).toBeTruthy());
   // });
 
-  // it('should not show heroes before OnInit', () => {
-  //   expect(spy.calls.any()).toBe(false, 'getHeroes not yet called');
-  // });
-  //
-  // it('should still not show heroes after component initialized', () => {
-  //   fixture.detectChanges();
-  //   de = fixture.debugElement.queryAll(By.css('h4'));
-  //   expect(de.length).toEqual(0, 'still no heroes');
-  //   // getQuote service is async => still has not returned with quote
-  //   expect(spy.calls.any()).toBe(true, 'getHeroes called');
-  //   expect(heroService.getHeroes).toHaveBeenCalled();
-  // });
+  it('should not show heroes before OnInit', () => {
+    expect(spy.calls.any()).toBe(false, 'getHeroes not yet called');
+  });
+
+  it('should still not show heroes after component initialized', () => {
+    fixture.detectChanges();
+    de = fixture.debugElement.queryAll(By.css('h4'));
+    expect(de.length).toEqual(0, 'still no heroes');
+    // getQuote service is async => still has not returned with quote
+    expect(spy.calls.any()).toBe(true, 'getHeroes called');
+    expect(heroService.getHeroes).toHaveBeenCalled();
+  });
 
 });

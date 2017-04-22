@@ -1,6 +1,6 @@
 <div id="search-component">
-	<h4>Hero Search</h4>
-	<input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+	<!--<h4>Hero Search</h4>-->
+	<input placeholder="Search" class="form-control mr-sm-2" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
 	<div>
 		<!-- The heroes property is an Observable of hero arrays -->
 		<!-- The async pipe subscribes to the Observable and produces the array of heroes to *ngFor -->

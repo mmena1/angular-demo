@@ -13,19 +13,23 @@ input {
 }
 
 button {
-	margin-top: 20px;
-	font-family: Arial;
-	background-color: #eee;
-	border: none;
-	padding: 5px 10px;
-	border-radius: 4px;
-	cursor: pointer;
-	cursor: hand;
+  margin-top: 20px;
 }
 
-button:hover {
-	background-color: #cfd8dc;
-}
+/*button {*/
+	/*margin-top: 20px;*/
+	/*font-family: Arial;*/
+	/*background-color: #eee;*/
+	/*border: none;*/
+	/*padding: 5px 10px;*/
+	/*border-radius: 4px;*/
+	/*cursor: pointer;*/
+	/*cursor: hand;*/
+/*}*/
+
+/*button:hover {*/
+	/*background-color: #cfd8dc;*/
+/*}*/
 
 button:disabled {
 	background-color: #eee;

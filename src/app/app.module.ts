@@ -19,6 +19,7 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 // import global styles in the main application module
 import '../styles/styles.css';
+import { HeroFormComponent } from './hero-form.component';
 
 @NgModule({
   // External modules used in the app must be declared here
@@ -30,7 +31,8 @@ import '../styles/styles.css';
     InMemoryWebApiModule.forRoot(InMemoryDataService)],
 
   // Custom components used in the app must be declared here
-  declarations: [AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, HeroSearchComponent],
+  declarations: [AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent, HeroSearchComponent,
+    HeroFormComponent],
   bootstrap: [AppComponent],
   // Providers which can be used for injection anywhere in the app
   providers: [HeroService]

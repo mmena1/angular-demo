@@ -1,0 +1,28 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse mb-4">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+          data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">{{title}}</a>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/heroes" routerLinkActive="active">Heroes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/form" routerLinkActive="active">Hero Form</a>
+      </li>
+    </ul>
+  </div>
+
+</nav>
+<div class="container">
+  <div class="jumbotron">
+    <!--<h1 class="display-3">{{title}}</h1>-->
+    <router-outlet></router-outlet>
+  </div>
+</div>
